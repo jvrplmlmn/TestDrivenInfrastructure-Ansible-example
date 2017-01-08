@@ -1,0 +1,26 @@
+---
+driver:
+  name: docker
+  use_sudo: false
+
+verifier:
+  name: inspec
+
+provisioner:
+  name: ansible_playbook
+  hosts: test-kitchen
+  roles_path: roles
+  require_ansible_repo: true
+  require_ansible_omnibus: false
+  require_chef_for_busser: false
+  require_ruby_for_busser: false
+
+platforms:
+  - name: ubuntu-14.04
+    platform: ubuntu
+    provision_command:
+       - /usr/bin/apt-get update
+       - /usr/bin/apt-get install -y apt-transport-https net-tools initscripts
+
+suites:
+  - name: default
